@@ -685,6 +685,14 @@ blockquote em {
   padding: 27px 29px 30px;
   border: 1px solid rgba(48, 43, 39, 0.1);
   background: #f7f4ed;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.service-card:hover,
+.service-card:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(64, 83, 69, 0.32);
+  box-shadow: 0 10px 26px rgba(48, 43, 39, 0.08);
 }
 
 .technology-card {
@@ -752,6 +760,22 @@ blockquote em {
   margin-right: 11px;
   color: var(--gold);
   content: "—";
+}
+
+.service-card-cta {
+  margin-top: 19px;
+  padding-bottom: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid rgba(64, 83, 69, 0.38);
+  color: var(--green);
+  font-size: 10px;
+  transition: gap 180ms ease;
+}
+
+.service-card-cta:hover {
+  gap: 18px;
 }
 
 .manifesto {

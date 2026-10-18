@@ -156,6 +156,9 @@
               <li>Hair installation</li>
               <li>Nail services</li>
             </ul>
+            <a class="service-card-cta" href="#appointment-enquiry">
+              Request a beauty appointment <span aria-hidden="true">↗</span>
+            </a>
           </article>
           <article class="service-card technology-card">
             <div class="service-card-top">
@@ -172,6 +175,9 @@
               <li>Digital skills training</li>
               <li>Programs for high school learners</li>
             </ul>
+            <a class="service-card-cta" href="#training-enquiry">
+              Ask about training <span aria-hidden="true">↗</span>
+            </a>
           </article>
         </div>
       </section>
@@ -186,7 +192,7 @@
           </p>
         </div>
         <div class="enquiry-grid">
-          <form class="enquiry-card" data-enquiry-form="booking">
+          <form class="enquiry-card" id="appointment-enquiry" data-enquiry-form="booking">
             <span class="service-number">BEAUTY APPOINTMENTS</span>
             <h3>Request an appointment</h3>
             <p class="enquiry-intro">Tell us what you’re looking for and your preferred date.</p>
@@ -228,7 +234,11 @@
             <p class="form-status" aria-live="polite" role="status"></p>
           </form>
 
-          <form class="enquiry-card training-enquiry" data-enquiry-form="training">
+          <form
+            class="enquiry-card training-enquiry"
+            id="training-enquiry"
+            data-enquiry-form="training"
+          >
             <span class="service-number">DIGITAL SKILLS TRAINING</span>
             <h3>Ask about training</h3>
             <p class="enquiry-intro">
