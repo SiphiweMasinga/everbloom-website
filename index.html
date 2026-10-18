@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script src="site-config.js"></script>
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -38,6 +39,7 @@
         <a href="#about">Our story</a>
         <a href="#what-we-do">Services</a>
         <a href="#vision">Our vision</a>
+        <a href="#enquiries">Make an enquiry</a>
         <a class="nav-contact" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -54,6 +56,7 @@
           <a class="button button-dark" href="#what-we-do">
             Explore our services <span aria-hidden="true">↘</span>
           </a>
+          <a class="hero-secondary-link" href="#enquiries">Appointments & training <span aria-hidden="true">↗</span></a>
           <div class="hero-note">
             <span class="note-line"></span>
             <span>Care, creativity & opportunity</span>
@@ -173,6 +176,99 @@
         </div>
       </section>
 
+      <section class="enquiries section-pad" id="enquiries">
+        <div class="enquiries-heading">
+          <span class="section-number">04 / TAKE THE NEXT STEP</span>
+          <h2>Tell us what<br /><em>you have in mind.</em></h2>
+          <p>
+            Send an appointment request or ask about digital skills training. We’ll follow up
+            with you to discuss availability and next steps.
+          </p>
+        </div>
+        <div class="enquiry-grid">
+          <form class="enquiry-card" data-enquiry-form="booking">
+            <span class="service-number">BEAUTY APPOINTMENTS</span>
+            <h3>Request an appointment</h3>
+            <p class="enquiry-intro">Tell us what you’re looking for and your preferred date.</p>
+            <label>
+              Your name
+              <input name="name" type="text" autocomplete="name" maxlength="120" required />
+            </label>
+            <div class="form-row">
+              <label>
+                Email address
+                <input name="email" type="email" autocomplete="email" maxlength="254" required />
+              </label>
+              <label>
+                Phone <span class="optional-label">(optional)</span>
+                <input name="phone" type="tel" autocomplete="tel" maxlength="30" />
+              </label>
+            </div>
+            <label>
+              Service
+              <select name="beauty_service" required>
+                <option value="">Choose a service</option>
+                <option value="Hair braiding">Hair braiding</option>
+                <option value="Eyelash extensions">Eyelash extensions</option>
+                <option value="Hair installation">Hair installation</option>
+                <option value="Nail services">Nail services</option>
+              </select>
+            </label>
+            <label>
+              Preferred date
+              <input name="requested_date" type="date" required />
+            </label>
+            <label class="consent-label">
+              <input name="consent" type="checkbox" required />
+              <span>I agree that Everbloom may use these details to respond to my request.</span>
+            </label>
+            <button class="button button-dark enquiry-submit" type="submit">
+              Send appointment request <span aria-hidden="true">↗</span>
+            </button>
+            <p class="form-status" aria-live="polite" role="status"></p>
+          </form>
+
+          <form class="enquiry-card training-enquiry" data-enquiry-form="training">
+            <span class="service-number">DIGITAL SKILLS TRAINING</span>
+            <h3>Ask about training</h3>
+            <p class="enquiry-intro">
+              A parent or guardian should send enquiries for learners under 18.
+            </p>
+            <label>
+              Parent, guardian, or adult learner name
+              <input name="name" type="text" autocomplete="name" maxlength="120" required />
+            </label>
+            <label>
+              Contact email
+              <input name="email" type="email" autocomplete="email" maxlength="254" required />
+            </label>
+            <label>
+              Learner age group
+              <select name="age_group" required>
+                <option value="">Choose an age group</option>
+                <option value="under_18">Under 18</option>
+                <option value="18_or_over">18 or over</option>
+              </select>
+            </label>
+            <label class="consent-label">
+              <input name="consent" type="checkbox" required />
+              <span>
+                I am 18 or over and, if this concerns a learner under 18, I am their parent or
+                guardian.
+              </span>
+            </label>
+            <button class="button button-dark enquiry-submit" type="submit">
+              Send training enquiry <span aria-hidden="true">↗</span>
+            </button>
+            <p class="form-status" aria-live="polite" role="status"></p>
+          </form>
+        </div>
+        <p class="enquiry-privacy">
+          Please don’t include sensitive personal information. Online enquiries will be
+          available once the secure service has been configured.
+        </p>
+      </section>
+
       <section class="manifesto">
         <span class="manifesto-flower" aria-hidden="true">✳</span>
         <p class="section-number">THE EVERBLOOM PROMISE</p>
@@ -185,7 +281,7 @@
       <section class="contact section-pad" id="contact">
         <div class="contact-mark" aria-hidden="true">e<span>✳</span></div>
         <div class="contact-copy">
-          <span class="section-number">04 / GET IN TOUCH</span>
+          <span class="section-number">05 / GET IN TOUCH</span>
           <h2>Let’s make<br />something <em>meaningful.</em></h2>
           <p>
             Ask us about a beauty appointment, web development, or digital skills training.
@@ -205,8 +301,67 @@
         <span>everbloom</span>
       </a>
       <p>Beauty, technology & opportunity.</p>
+      <span>Owned by Siphiwe Masinga</span>
       <span>© <span id="year"></span> Everbloom Pty Ltd</span>
       <a class="back-to-top" href="#home">Back to top ↑</a>
     </footer>
+
+    <aside class="chat-widget" aria-label="Client assistance">
+      <section
+        class="chat-panel"
+        id="chat-panel"
+        role="dialog"
+        aria-labelledby="chat-title"
+        hidden
+      >
+        <header class="chat-header">
+          <div>
+            <p class="chat-kicker">EVERBLOOM PTY LTD</p>
+            <h2 id="chat-title">How can we help?</h2>
+            <span class="chat-status"><span></span> Automated assistant</span>
+          </div>
+          <button class="chat-close" type="button" aria-label="Close chat">×</button>
+        </header>
+        <div class="chat-messages" id="chat-messages" aria-live="polite" aria-relevant="additions">
+          <p class="chat-message chat-message-assistant">
+            Hello! Ask me about our beauty services, digital training, or how to get in touch.
+          </p>
+        </div>
+        <div class="chat-suggestions" aria-label="Suggested questions">
+          <button type="button" data-chat-question="What beauty services do you offer?">
+            Beauty services
+          </button>
+          <button type="button" data-chat-question="Tell me about digital skills training.">
+            Digital training
+          </button>
+        </div>
+        <form class="chat-form" id="chat-form">
+          <label class="visually-hidden" for="chat-input">Your question</label>
+          <input
+            id="chat-input"
+            name="message"
+            type="text"
+            placeholder="Write a message…"
+            autocomplete="off"
+            maxlength="500"
+            required
+          />
+          <button type="submit" aria-label="Send message">↑</button>
+        </form>
+        <p class="chat-disclaimer">
+          Automated answers · Don’t share sensitive information in chat.
+        </p>
+      </section>
+      <button
+        class="chat-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="chat-panel"
+        aria-label="Open Everbloom client assistant"
+      >
+        <span class="chat-toggle-icon" aria-hidden="true">✳</span>
+        <span class="chat-toggle-label">Ask us</span>
+      </button>
+    </aside>
   </body>
 </html>
