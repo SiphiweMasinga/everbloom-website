@@ -16,6 +16,11 @@ siteNav.addEventListener("click", (event) => {
   }
 });
 
+const siteHeader = document.querySelector(".site-header");
+const updateHeaderShadow = () => siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+updateHeaderShadow();
+window.addEventListener("scroll", updateHeaderShadow, { passive: true });
+
 document.querySelector("#year").textContent = new Date().getFullYear();
 
 const siteConfig = window.EVERBLOOM_CONFIG ?? {};
@@ -42,8 +47,62 @@ const bookingDate = document.querySelector('[data-enquiry-form="booking"] [name=
 const today = new Date();
 bookingDate.min = localDateString(today);
 
+document.querySelectorAll("[data-slideshow]").forEach((slideshow) => {
+  const slides = [...slideshow.querySelectorAll(".slide")];
+  const dotsContainer = slideshow.querySelector(".slide-dots");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let current = 0;
+  let timer;
+
+  const dots = slides.map((slide, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Show photo ${index + 1} of ${slides.length}`);
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      restart();
+    });
+    dotsContainer.append(dot);
+    return dot;
+  });
+
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === current);
+      slide.setAttribute("aria-hidden", String(slideIndex !== current));
+    });
+    dots.forEach((dot, dotIndex) => dot.setAttribute("aria-current", String(dotIndex === current)));
+  }
+
+  function stop() {
+    clearInterval(timer);
+  }
+
+  function restart() {
+    stop();
+    if (!prefersReducedMotion) timer = setInterval(() => showSlide(current + 1), 4500);
+  }
+
+  slideshow.querySelector(".slide-prev").addEventListener("click", () => {
+    showSlide(current - 1);
+    restart();
+  });
+  slideshow.querySelector(".slide-next").addEventListener("click", () => {
+    showSlide(current + 1);
+    restart();
+  });
+  slideshow.addEventListener("mouseenter", stop);
+  slideshow.addEventListener("mouseleave", restart);
+  slideshow.addEventListener("focusin", stop);
+  slideshow.addEventListener("focusout", restart);
+
+  showSlide(0);
+  restart();
+});
+
 const revealElements = document.querySelectorAll(
-  ".hero-copy, .hero-art, .intro, .principles, .offerings, .enquiries, .manifesto, .contact",
+  ".hero-copy, .hero-art, .about, .principles, .offerings, .enquiries, .manifesto, .contact",
 );
 
 if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -62,7 +121,7 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
   revealElements.forEach((element) => revealObserver.observe(element));
 }
 
-const sectionLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
+const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
 const observedSections = sectionLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -95,19 +154,74 @@ function setFormStatus(form, message, state) {
   status.dataset.state = state;
 }
 
-async function sendEnquiry(form, submitButton) {
-  if (!isBackendConfigured || !assistantEndpoint) {
-    setFormStatus(
-      form,
-      "Online enquiries aren’t connected yet. The business owner needs to configure the secure submission service before requests can be sent.",
-      "error",
-    );
-    return;
+const businessWhatsApp = "27649904000";
+const businessEmail = "masingasiphiwe95@gmail.com";
+
+function formatBookingDate(isoDate) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-ZA", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function enquiryMessage(payload) {
+  if (payload.kind === "booking") {
+    return [
+      "Hello EverBloom, I'd like to book an appointment.",
+      "",
+      `Name: ${payload.name}`,
+      `Service: ${payload.beauty_service}`,
+      `Date: ${formatBookingDate(payload.requested_date)}`,
+      `Time: ${payload.requested_time}`,
+      `Email: ${payload.email}`,
+      `Phone: ${payload.phone}`,
+      "",
+      "Please confirm if this time is available. Thank you!",
+    ].join("\n");
   }
 
-  submitButton.disabled = true;
-  setFormStatus(form, "Sending your enquiry securely…", "pending");
+  return [
+    "Hello EverBloom, I'd like to ask about digital skills training.",
+    "",
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    `Learner age group: ${payload.age_group === "under_18" ? "Under 18" : "18 or over"}`,
+  ].join("\n");
+}
 
+function hideFallback(form) {
+  form.querySelector(".form-fallback").hidden = true;
+}
+
+function showFallback(form, payload) {
+  const message = enquiryMessage(payload);
+  const subject =
+    payload.kind === "booking"
+      ? `Appointment request: ${payload.beauty_service}`
+      : "Digital skills training enquiry";
+  const fallback = form.querySelector(".form-fallback");
+  fallback.querySelector('[data-fallback="whatsapp"]').href =
+    `https://wa.me/${businessWhatsApp}?text=${encodeURIComponent(message)}`;
+  fallback.querySelector('[data-fallback="email"]').href =
+    `mailto:${businessEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  fallback.hidden = false;
+}
+
+function successMessage(payload, delivered) {
+  if (payload.kind !== "booking") {
+    return "Thank you. Your enquiry has been received; the EverBloom team will follow up.";
+  }
+
+  const channels = [delivered?.email && "email", delivered?.whatsapp && "WhatsApp"].filter(Boolean);
+  const copy = channels.length ? ` We’ve sent a copy to your ${channels.join(" and ")}.` : "";
+  const confirmVia = payload.whatsapp_opt_in ? "email and WhatsApp" : "email";
+  return `Thank you! Your appointment request has been sent.${copy} We’ll confirm your booking by ${confirmVia} once we’ve checked availability.`;
+}
+
+async function sendEnquiry(form, submitButton) {
   const fields = Object.fromEntries(new FormData(form));
   const payload = {
     action: "enquiry",
@@ -117,9 +231,26 @@ async function sendEnquiry(form, submitButton) {
     phone: String(fields.phone ?? "").trim() || null,
     beauty_service: fields.beauty_service || null,
     requested_date: fields.requested_date || null,
+    requested_time: fields.requested_time || null,
+    whatsapp_opt_in: Boolean(form.elements.whatsapp_opt_in?.checked),
     age_group: fields.age_group || null,
     consent: form.elements.consent.checked,
   };
+
+  hideFallback(form);
+
+  if (!isBackendConfigured || !assistantEndpoint) {
+    setFormStatus(
+      form,
+      "Almost done — choose how you’d like to send your request. Your details are filled in for you, and we’ll reply to confirm.",
+      "pending",
+    );
+    showFallback(form, payload);
+    return;
+  }
+
+  submitButton.disabled = true;
+  setFormStatus(form, "Sending your request securely…", "pending");
 
   try {
     const response = await fetch(assistantEndpoint, {
@@ -134,20 +265,20 @@ async function sendEnquiry(form, submitButton) {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      throw new Error(
-        error.error ?? "We couldn’t send your enquiry right now. Please try again later.",
-      );
+      throw new Error(error.error ?? "We couldn’t send your request right now.");
     }
 
+    const result = await response.json().catch(() => ({}));
     form.reset();
     bookingDate.min = localDateString(new Date());
+    setFormStatus(form, successMessage(payload, result.delivered), "success");
+  } catch (error) {
     setFormStatus(
       form,
-      "Thank you. Your enquiry has been received; the Everbloom team will follow up.",
-      "success",
+      `${error instanceof TypeError ? "We couldn’t reach our booking service." : error.message} You can also send your request directly:`,
+      "error",
     );
-  } catch (error) {
-    setFormStatus(form, error.message, "error");
+    showFallback(form, payload);
   } finally {
     submitButton.disabled = false;
   }
@@ -196,7 +327,7 @@ const chatAnswers = [
   {
     keywords: ["contact", "email", "appointment", "book", "booking", "price", "cost"],
     answer:
-      "For appointments, pricing, or personal assistance, email Everbloom at hello@everbloom.com.",
+      "For appointments, pricing, or personal assistance, email Everbloom at masingasiphiwe95@gmail.com, call +27 64 990 4000, or message us on WhatsApp.",
   },
   {
     keywords: ["mission", "vision", "purpose"],
@@ -225,7 +356,7 @@ function answerChat(question) {
 
   return (
     match?.answer ??
-    "I’m not sure about that yet. Please email hello@everbloom.com and the Everbloom team can help."
+    "I’m not sure about that yet. Please email masingasiphiwe95@gmail.com and the Everbloom team can help."
   );
 }
 

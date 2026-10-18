@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#faf6f1" />
+    <title>Review Appointment — EverBloom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site-config.js"></script>
+    <script src="confirm.js" defer></script>
+  </head>
+  <body class="confirm-page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="index.html" aria-label="EverBloom home">
+          <span class="wordmark-monogram" aria-hidden="true">E<em>B</em></span>
+          <span class="wordmark-text">Ever<em>Bloom</em></span>
+        </a>
+      </div>
+    </header>
+
+    <main class="confirm-main section-pad">
+      <section class="enquiry-card confirm-card" aria-labelledby="confirm-title">
+        <span class="service-number">Appointment request</span>
+        <h1 id="confirm-title">Review appointment</h1>
+        <p class="confirm-status form-status" role="status" aria-live="polite">
+          Loading booking details…
+        </p>
+
+        <dl class="confirm-details" hidden>
+          <div><dt>Client</dt><dd data-field="name"></dd></div>
+          <div><dt>Service</dt><dd data-field="service"></dd></div>
+          <div><dt>Date</dt><dd data-field="date"></dd></div>
+          <div><dt>Time</dt><dd data-field="time"></dd></div>
+          <div><dt>Email</dt><dd data-field="email"></dd></div>
+          <div><dt>Phone</dt><dd data-field="phone"></dd></div>
+          <div><dt>WhatsApp updates</dt><dd data-field="whatsapp"></dd></div>
+        </dl>
+
+        <div class="confirm-actions" hidden>
+          <button class="button button-dark" type="button" data-decision="confirmed">
+            Confirm appointment
+          </button>
+          <button class="button button-outline" type="button" data-decision="declined">
+            Decline
+          </button>
+        </div>
+        <p class="confirm-note">
+          The client is notified automatically by email, and on WhatsApp if they opted in.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
