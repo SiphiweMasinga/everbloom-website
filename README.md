@@ -18,7 +18,8 @@ Gemini through a Supabase Edge Function; the Gemini API key stays on the server.
 ## Run locally
 
 Open `index.html` in a web browser. The front end uses plain HTML, CSS, and JavaScript and
-does not require a build step.
+does not require a build step. Fonts load from Google Fonts and editorial photographs from
+Unsplash, so the page needs an internet connection to display those assets.
 
 ## Enable online enquiries and AI chat
 

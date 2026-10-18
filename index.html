@@ -7,10 +7,11 @@
       name="description"
       content="Everbloom Pty Ltd offers beauty services, web development, and digital skills training for high school learners."
     />
-    <meta name="theme-color" content="#f7f4ef" />
+    <meta name="theme-color" content="#fcf7f5" />
     <title>Everbloom Pty Ltd — Beauty & Technology</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
       rel="stylesheet"
@@ -48,7 +49,7 @@
       <section class="hero" id="home">
         <div class="hero-copy">
           <p class="eyebrow"><span class="status-dot"></span> Everbloom Pty Ltd</p>
-          <h1>Beauty, with care.<br /><em>Skills for tomorrow.</em></h1>
+          <h1>Beauty, with care.<br /><em>and room to grow.</em></h1>
           <p class="hero-description">
             A considered approach to personal beauty and practical technology—helping people
             feel their best and young learners build skills for the future.
@@ -63,19 +64,22 @@
           </div>
         </div>
 
-        <div class="hero-art" aria-label="Abstract botanical-inspired artwork">
-          <div class="art-orbit orbit-one"></div>
-          <div class="art-orbit orbit-two"></div>
-          <div class="art-sun"></div>
-          <div class="art-petal petal-one"></div>
-          <div class="art-petal petal-two"></div>
-          <div class="art-petal petal-three"></div>
-          <div class="art-petal petal-four"></div>
-          <div class="art-core"></div>
-          <span class="art-label label-top">Carefully considered</span>
-          <span class="art-label label-bottom">BEAUTY · TECHNOLOGY · OPPORTUNITY</span>
+        <div class="hero-art">
+          <img
+            class="hero-photo"
+            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=1100&amp;h=1400&amp;q=85"
+            alt="Portrait of a woman with long hair against a dark background"
+            fetchpriority="high"
+          />
+          <div class="hero-photo-shade" aria-hidden="true"></div>
+          <span class="hero-photo-caption">A little care goes a long way.</span>
+          <span class="art-label label-top">Your moment, your glow</span>
           <span class="art-spark spark-one" aria-hidden="true">✳</span>
-          <span class="art-spark spark-two" aria-hidden="true">✦</span>
+          <div class="hero-stamp" aria-label="Beauty and technology, growing together">
+            <span>BEAUTY</span>
+            <b aria-hidden="true">✳</b>
+            <span>TECH</span>
+          </div>
         </div>
         <div class="hero-index" aria-hidden="true">01 <span></span> 03</div>
       </section>
@@ -146,6 +150,12 @@
               <span class="service-number">01 / BEAUTY</span>
               <span class="service-symbol" aria-hidden="true">✿</span>
             </div>
+            <img
+              class="service-photo"
+              src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&amp;fit=crop&amp;w=520&amp;h=620&amp;q=80"
+              alt="A calm, beautifully styled salon"
+              loading="lazy"
+            />
             <h3>Beauty, with a personal touch.</h3>
             <p class="service-intro">
               Careful, creative services to help you look and feel your best.
@@ -165,6 +175,12 @@
               <span class="service-number">02 / TECHNOLOGY</span>
               <span class="service-symbol tech-symbol" aria-hidden="true">⌘</span>
             </div>
+            <img
+              class="service-photo"
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&amp;fit=crop&amp;w=520&amp;h=620&amp;q=80"
+              alt="A creative web development workspace"
+              loading="lazy"
+            />
             <h3>Digital skills for a brighter future.</h3>
             <p class="service-intro">
               Building practical digital skills and creating useful experiences for a
