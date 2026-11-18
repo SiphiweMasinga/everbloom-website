@@ -1,4 +1,4 @@
 window.ZOEBLOOM_CONFIG = {
-  supabaseUrl: "",
-  supabasePublicKey: "",
+  supabaseUrl: "https://qrhgaawznabftdiykiiy.supabase.co",
+  supabasePublicKey: "sb_publishable_AlV62NH_mAv0k-JWH8bbgQ_zT-ufLNN",
 };
