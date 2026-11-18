@@ -1,4 +1,4 @@
-const siteConfig = window.EVERBLOOM_CONFIG ?? {};
+const siteConfig = window.ZOEBLOOM_CONFIG ?? {};
 const supabaseUrl = siteConfig.supabaseUrl?.replace(/\/$/, "");
 const supabasePublicKey = siteConfig.supabasePublicKey;
 const endpoint = supabaseUrl && `${supabaseUrl}/functions/v1/public-assistant`;

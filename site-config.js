@@ -1,4 +1,4 @@
-window.EVERBLOOM_CONFIG = {
+window.ZOEBLOOM_CONFIG = {
   supabaseUrl: "",
   supabasePublicKey: "",
 };

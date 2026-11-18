@@ -23,7 +23,7 @@ window.addEventListener("scroll", updateHeaderShadow, { passive: true });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
 
-const siteConfig = window.EVERBLOOM_CONFIG ?? {};
+const siteConfig = window.ZOEBLOOM_CONFIG ?? {};
 const supabaseUrl = siteConfig.supabaseUrl?.replace(/\/$/, "");
 const supabasePublicKey = siteConfig.supabasePublicKey;
 const isBackendConfigured =
@@ -170,7 +170,7 @@ function formatBookingDate(isoDate) {
 function enquiryMessage(payload) {
   if (payload.kind === "booking") {
     return [
-      "Hello EverBloom, I'd like to book an appointment.",
+      "Hello ZOEBLOOM, I'd like to book an appointment.",
       "",
       `Name: ${payload.name}`,
       `Service: ${payload.beauty_service}`,
@@ -184,7 +184,7 @@ function enquiryMessage(payload) {
   }
 
   return [
-    "Hello EverBloom, I'd like to ask about digital skills training.",
+    "Hello ZOEBLOOM, I'd like to ask about digital skills training.",
     "",
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
@@ -212,7 +212,7 @@ function showFallback(form, payload) {
 
 function successMessage(payload, delivered) {
   if (payload.kind !== "booking") {
-    return "Thank you. Your enquiry has been received; the EverBloom team will follow up.";
+    return "Thank you. Your enquiry has been received; the ZOEBLOOM team will follow up.";
   }
 
   const channels = [delivered?.email && "email", delivered?.whatsapp && "WhatsApp"].filter(Boolean);
@@ -313,7 +313,7 @@ const chatAnswers = [
   {
     keywords: ["train", "learner", "school", "digital", "course", "student"],
     answer:
-      "Everbloom offers digital skills training for high school learners, as well as web development. Email us to ask about training details.",
+      "ZOEBLOOM offers digital skills training for high school learners, as well as web development. Email us to ask about training details.",
   },
   {
     keywords: ["web", "website", "develop", "technology"],
@@ -322,12 +322,12 @@ const chatAnswers = [
   },
   {
     keywords: ["owner", "owned", "founder", "siphiwe"],
-    answer: "Everbloom Pty Ltd is owned by Siphiwe Masinga.",
+    answer: "ZOEBLOOM Pty Ltd is owned by Siphiwe Masinga.",
   },
   {
     keywords: ["contact", "email", "appointment", "book", "booking", "price", "cost"],
     answer:
-      "For appointments, pricing, or personal assistance, email Everbloom at masingasiphiwe95@gmail.com, call +27 64 990 4000, or message us on WhatsApp.",
+      "For appointments, pricing, or personal assistance, email ZOEBLOOM at masingasiphiwe95@gmail.com, call +27 64 990 4000, or message us on WhatsApp.",
   },
   {
     keywords: ["mission", "vision", "purpose"],
@@ -356,7 +356,7 @@ function answerChat(question) {
 
   return (
     match?.answer ??
-    "I’m not sure about that yet. Please email masingasiphiwe95@gmail.com and the Everbloom team can help."
+    "I’m not sure about that yet. Please email masingasiphiwe95@gmail.com and the ZOEBLOOM team can help."
   );
 }
 
@@ -410,7 +410,7 @@ chatToggle.addEventListener("click", () => {
   chatToggle.setAttribute("aria-expanded", String(!isOpen));
   chatToggle.setAttribute(
     "aria-label",
-    isOpen ? "Open Everbloom client assistant" : "Close Everbloom client assistant",
+    isOpen ? "Open ZOEBLOOM client assistant" : "Close ZOEBLOOM client assistant",
   );
   chatPanel.hidden = isOpen;
 
@@ -420,7 +420,7 @@ chatToggle.addEventListener("click", () => {
 chatClose.addEventListener("click", () => {
   chatPanel.hidden = true;
   chatToggle.setAttribute("aria-expanded", "false");
-  chatToggle.setAttribute("aria-label", "Open Everbloom client assistant");
+  chatToggle.setAttribute("aria-label", "Open ZOEBLOOM client assistant");
   chatToggle.focus();
 });
 

@@ -1,6 +1,6 @@
-# Everbloom Pty Ltd
+# ZOEBLOOM Pty Ltd
 
-A responsive website for Everbloom's beauty services and technology offerings, owned by
+A responsive website for ZOEBLOOM's beauty services and technology offerings, owned by
 Siphiwe Masinga.
 
 ## Services
@@ -13,7 +13,7 @@ Siphiwe Masinga.
 
 With no backend configured, the assistant uses built-in answers and the booking and training
 forms hand the client's details to WhatsApp or email, pre-filled, so requests still reach
-Everbloom. Once configured, the assistant uses Google Gemini through a Supabase Edge
+ZOEBLOOM. Once configured, the assistant uses Google Gemini through a Supabase Edge
 Function; the Gemini API key stays on the server.
 
 ## How appointment confirmations work
@@ -59,10 +59,10 @@ Unsplash, so the page needs an internet connection to display those assets.
    | --- | --- |
    | `GEMINI_API_KEY` | From Google AI Studio |
    | `RATE_LIMIT_SALT` | A long, random string |
-   | `SITE_URL` | The live website address, e.g. `https://everbloom.co.za` |
+   | `SITE_URL` | The live website address, e.g. `https://zoebloom.co.za` |
    | `OWNER_EMAIL` | Where new booking requests are sent, e.g. `masingasiphiwe95@gmail.com` |
    | `RESEND_API_KEY` | From [resend.com](https://resend.com) → API Keys |
-   | `EMAIL_FROM` | e.g. `EverBloom <bookings@everbloom.co.za>` on a domain verified in Resend |
+   | `EMAIL_FROM` | e.g. `ZOEBLOOM <bookings@zoebloom.co.za>` on a domain verified in Resend |
    | `WHATSAPP_ACCESS_TOKEN` | Permanent system-user token from Meta Business settings |
    | `WHATSAPP_PHONE_NUMBER_ID` | From WhatsApp → API Setup in the Meta developer app |
    | `WHATSAPP_TEMPLATE_RECEIVED` | Name of the approved "request received" template |
@@ -82,9 +82,9 @@ Unsplash, so the page needs an internet connection to display those assets.
    templates. Suggested wording:
 
    - Received (`{{1}}` name, `{{2}}` service, `{{3}}` date, `{{4}}` time):
-     "Hi {{1}}, thank you for your EverBloom booking request for {{2}} on {{3}} at {{4}}.
+     "Hi {{1}}, thank you for your ZOEBLOOM booking request for {{2}} on {{3}} at {{4}}.
      It isn't confirmed yet. We'll confirm shortly."
-   - Confirmed (same variables): "Hi {{1}}, your EverBloom appointment for {{2}} on {{3}}
+   - Confirmed (same variables): "Hi {{1}}, your ZOEBLOOM appointment for {{2}} on {{3}}
      at {{4}} is confirmed. We look forward to seeing you!"
    - Declined (`{{1}}` name, `{{2}}` service, `{{3}}` date): "Hi {{1}}, sorry, we can't
      take your {{2}} appointment on {{3}}. Please reply to arrange another time."

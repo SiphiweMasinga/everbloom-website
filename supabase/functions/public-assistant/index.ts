@@ -14,14 +14,14 @@ const beautyServices = new Set([
 
 const businessTimeZone = "Africa/Johannesburg";
 
-const systemPrompt = `You are Everbloom Pty Ltd's automated website assistant.
+const systemPrompt = `You are ZOEBLOOM Pty Ltd's automated website assistant.
 Answer courteously and briefly using only these facts:
-- Everbloom is owned by Siphiwe Masinga.
+- ZOEBLOOM is owned by Siphiwe Masinga.
 - Beauty services: hair braiding, eyelash extensions, hair installation, and nail services.
 - Technology services: web development and digital skills training for high school learners.
 - Mission: provide thoughtful beauty services and make technology more accessible.
 - Vision: help people flourish through confidence, creativity, and digital opportunity.
-- Clients can request an appointment using the booking form on the website. Everbloom
+- Clients can request an appointment using the booking form on the website. ZOEBLOOM
   confirms each appointment by email, and by WhatsApp if the client opts in.
 Do not invent prices, availability, qualifications, addresses, policies, or course dates.
 Do not collect personal information or claim that an appointment or enrolment is confirmed.
@@ -334,7 +334,7 @@ async function sendEmail(options: {
     `<div style="background:#faf6f1;padding:32px 16px;font-family:Georgia,serif;color:#2b2228">` +
     `<div style="max-width:520px;margin:0 auto;background:#fffdfa;border:1px solid #e8ddd6;` +
     `padding:36px 32px">` +
-    `<p style="margin:0 0 24px;font-size:22px">Ever<em style="color:#a8706a">Bloom</em></p>` +
+    `<p style="margin:0 0 24px;font-size:22px">ZOE<em style="color:#a8706a">BLOOM</em></p>` +
     `<h1 style="margin:0 0 16px;font-size:26px;font-weight:normal">${escapeHtml(options.heading)}</h1>` +
     options.paragraphs
       .map((text) => `<p style="font-family:Arial,sans-serif;line-height:1.6">${escapeHtml(text)}</p>`)
@@ -344,7 +344,7 @@ async function sendEmail(options: {
       : "") +
     button +
     `<p style="margin-top:32px;font-family:Arial,sans-serif;font-size:13px;color:#76686f">` +
-    `EverBloom Pty Ltd · Beauty &amp; Technology</p></div></div>`;
+    `ZOEBLOOM Pty Ltd · Beauty &amp; Technology</p></div></div>`;
   const text = [
     options.heading,
     "",
@@ -439,7 +439,7 @@ async function notifyBookingReceived(
   const [clientEmail, clientWhatsApp] = await Promise.all([
     sendEmail({
       to: booking.email,
-      subject: "We’ve received your EverBloom appointment request",
+      subject: "We’ve received your ZOEBLOOM appointment request",
       heading: `Thank you, ${booking.name}.`,
       paragraphs: [
         "We’ve received your appointment request. It isn’t confirmed yet — we’ll check " +
@@ -492,8 +492,8 @@ async function notifyBookingDecision(
     sendEmail({
       to: booking.email,
       subject: confirmed
-        ? "Your EverBloom appointment is confirmed"
-        : "About your EverBloom appointment request",
+        ? "Your ZOEBLOOM appointment is confirmed"
+        : "About your ZOEBLOOM appointment request",
       heading: confirmed ? "Your appointment is confirmed." : `Sorry, ${booking.name}.`,
       paragraphs: confirmed
         ? [
